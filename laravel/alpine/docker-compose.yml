@@ -38,7 +38,7 @@ services:
   db:
     build: ./postgres
     volumes:
-      - ${DATA_SAVE_PATH}/postgres:/var/lib/postgresql
+      - db:/var/lib/postgresql/data
     ports:
       - "${POSTGRES_PORT}:5432"
     environment:
@@ -51,7 +51,7 @@ services:
   cache:
     image: redis:alpine
     volumes:
-      - ${DATA_SAVE_PATH}/redis:/data
+      - cache:/data
     ports:
       - "${REDIS_PORT}:6379"
     networks:
@@ -60,3 +60,7 @@ services:
 networks:
   frontend:
   backend:
+
+volumes:
+  db:
+  cache:
