@@ -16,6 +16,6 @@ docker run -v $VOL_NAME:$CON_DATA --name $TEMP_CONTAINER alpine /bin/sh
 
 docker run --rm --volumes-from $TEMP_CONTAINER \
     -v $VOL_EXT:/backup alpine \
-    /bin/sh -c "cd / && tar xvf /backup/$FILE_NAME"
+    tar xvf /backup/$FILE_NAME
 
 docker container rm $TEMP_CONTAINER
