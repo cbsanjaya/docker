@@ -12,7 +12,12 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 RUN chown -R mysql:root /var/lib/mysql/
 
-ADD my.cnf /etc/mysql/conf.d/my.cnf
+COPY my.cnf /etc/mysql/conf.d/my.cnf
+
+COPY backup.sh /bin/backup
+COPY restore.sh /bin/restore
+
+RUN chmod +x /bin/backup /bin/restore
 
 CMD ["mysqld"]
 
