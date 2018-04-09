@@ -10,6 +10,10 @@ RUN apk add --no-cache postgresql-dev \
   echo "export PATH=${PATH}:/var/www/vendor/bin" >> ~/.bashrc && \
   mv composer.phar /usr/local/bin/composer
 
+# Change user of www-data
+RUN deluser www-data
+RUN adduser -D -H -u 1000 -s /bin/sh www-data
+
 WORKDIR /var/www
 
 CMD ["php-fpm"]
