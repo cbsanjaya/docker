@@ -1,17 +1,46 @@
-FROM php:fpm-alpine3.7
+FROM php:fpm
 
 MAINTAINER Cahya bagus Sanjaya <9c96b6@gmail.com>
-  # Install postgresql
-RUN apk add --no-cache postgresql-dev \
-  # Install the PHP pdo_pgsql extention
-  && docker-php-ext-install pdo_pgsql \
-  # Install composer and add its bin to the PATH.
-  && curl -s http://getcomposer.org/installer | php \
-  && echo "export PATH=${PATH}:/var/www/vendor/bin" >> ~/.bashrc \
-  && mv composer.phar /usr/local/bin/composer \
-  # Change user of www-data
-  && deluser www-data \
-  && adduser -D -H -u 1000 -s /bin/sh www-data
+
+#
+#--------------------------------------------------------------------------
+# Software's Installation
+#--------------------------------------------------------------------------
+#
+# Installing tools and PHP extentions using "apt", "docker-php", "pecl",
+#
+
+# Install "curl", "libmemcached-dev", "libpq-dev", "libjpeg-dev",
+#         "libpng-dev", "libfreetype6-dev", "libssl-dev", "libmcrypt-dev",
+RUN apt-get update \
+  && apt-get install -y --no-install-recommends \
+    curl \
+    libmemcached-dev \
+    libz-dev \
+    libpq-dev \
+    libjpeg-dev \
+    libpng-dev \
+    libfreetype6-dev \
+    libssl-dev \
+    libmcrypt-dev \
+    git \
+  && rm -rf /var/lib/apt/lists/*
+ 
+# Install the PHP pdo_mysql extention
+RUN docker-php-ext-install pdo_mysql \
+# Install the PHP gd library
+&& docker-php-ext-configure gd \
+  --enable-gd-native-ttf \
+  --with-jpeg-dir=/usr/lib \
+  --with-freetype-dir=/usr/include/freetype2 && \
+  docker-php-ext-install gd
+
+# Install composer and add its bin to the PATH.
+RUN curl -s http://getcomposer.org/installer | php && \
+  echo "export PATH=${PATH}:/var/www/vendor/bin" >> ~/.bashrc && \
+  mv composer.phar /usr/local/bin/composer
+
+RUN usermod -u 1000 www-data
 
 WORKDIR /var/www
 
