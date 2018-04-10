@@ -20,7 +20,7 @@ services:
       - ${APP_SRC}:/var/www
     ports:
       - "80:80"
-      - "433:443"
+      - "443:443"
     depends_on:
       - app
     networks:
@@ -28,18 +28,37 @@ services:
       - backend
 
   db:
-    image: postgres:alpine
-    volumes:
-      - db:/var/lib/postgresql/data
-    ports:
-      - "${POSTGRES_PORT}:5432"
+    image: cbsanjaya/laravel:db
     environment:
-      - POSTGRES_DB=${POSTGRES_DB}
-      - POSTGRES_USER=${POSTGRES_USER}
-      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - TZ=${APP_TIMEZONE}
+    volumes:
+      - db:/var/lib/mysql
+      - $MYSQL_BACKUP_DIR:/backup
+    ports:
+      - "${MYSQL_PORT}:3306"
     networks:
       - backend
 
+  dbadmin:
+    image: phpmyadmin/phpmyadmin
+    volumes:
+      - dbadmin:/sessions
+    environment:
+      - PMA_ARBITRARY=1
+      - MYSQL_USER=${PMA_USER}
+      - MYSQL_PASSWORD=${PMA_PASSWORD}
+    ports:
+      - "${PMA_PORT}:80"
+    depends_on:
+      - db
+    networks:
+      - frontend
+      - backend
+    
   cache:
     image: redis:alpine
     volumes:
@@ -56,3 +75,4 @@ networks:
 volumes:
   db:
   cache:
+  dbadmin:
