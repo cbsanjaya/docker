@@ -64,6 +64,21 @@ services:
     networks:
       - backend
 
+  cacheadmin:
+    image: cbsanjaya/laravel:redisadmin
+    environment:
+      - ADMIN_USER=${REDIS_ADMIN_USER}
+      - ADMIN_PASS=${REDIS_ADMIN_PASS}
+      - REDIS_1_HOST=cache
+      - REDIS_1_PORT=6379
+    ports:
+      - "${REDIS_ADMIN_PORT}:6000"
+    depends_on:
+      - cache
+    networks:
+      - frontend
+      - backend
+
 networks:
   frontend:
   backend:
