@@ -38,8 +38,6 @@ services:
     volumes:
       - db:/var/lib/mysql
       - $MYSQL_BACKUP_DIR:/backup
-    ports:
-      - "${MYSQL_PORT}:3306"
     networks:
       - backend
 
@@ -63,8 +61,6 @@ services:
     image: redis:alpine
     volumes:
       - cache:/data
-    ports:
-      - "${REDIS_PORT}:6379"
     networks:
       - backend
 
