@@ -1,2 +1,2 @@
 # Aplikasi Utama
-FROM php:7.2-fpm
+docker php:7.2-fpm, composer and git
