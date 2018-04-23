@@ -206,17 +206,16 @@ RUN echo "cgi.fix_pathinfo=0" > ${php_vars} &&\
         -e "s/^;clear_env = no$/clear_env = no/" \
         ${fpm_conf}
 
-# Add Scripts
-ADD scripts/start.sh /start.sh
-ADD scripts/pull /usr/bin/pull
-ADD scripts/push /usr/bin/push
-ADD scripts/letsencrypt-setup /usr/bin/letsencrypt-setup
-ADD scripts/letsencrypt-renew /usr/bin/letsencrypt-renew
+# COPY Scripts
+COPY scripts/start.sh /start.sh
+COPY scripts/pull /usr/bin/pull
+COPY scripts/push /usr/bin/push
+COPY scripts/letsencrypt-setup /usr/bin/letsencrypt-setup
+COPY scripts/letsencrypt-renew /usr/bin/letsencrypt-renew
 RUN chmod 755 /usr/bin/pull && chmod 755 /usr/bin/push && chmod 755 /usr/bin/letsencrypt-setup && chmod 755 /usr/bin/letsencrypt-renew && chmod 755 /start.sh
 
 # copy in code
-ADD src/ /var/www/html/
-ADD errors/ /var/www/errors
+COPY errors/ /var/www/errors
 
 EXPOSE 443 80
 
