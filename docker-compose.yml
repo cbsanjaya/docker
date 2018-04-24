@@ -6,26 +6,15 @@ services:
     image: cbsanjaya/laravel:app
     volumes:
       - ${APP_SRC}:/var/www
-    expose:
-      - "9000"
+    ports:
+      - "80:80"
+      - "443:443"
     depends_on:
       - db
       - cache
     networks:
       - backend
-
-  web:
-    image: cbsanjaya/laravel:web
-    volumes:
-      - ${APP_SRC}:/var/www
-    ports:
-      - "80:80"
-      - "443:443"
-    depends_on:
-      - app
-    networks:
       - frontend
-      - backend
 
   db:
     image: cbsanjaya/laravel:db
