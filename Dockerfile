@@ -160,6 +160,7 @@ COPY conf/nginx.conf /etc/nginx/nginx.conf
 COPY conf/nginx.vh.default.conf /etc/nginx/conf.d/default.conf
 
 COPY run.sh /run.sh
+RUN chmod u+rwx /run.sh
 
 EXPOSE 443 80
 
