@@ -157,7 +157,7 @@ RUN apk update && \
 
 COPY conf/supervisord.conf /etc/supervisord.conf
 COPY conf/nginx.conf /etc/nginx/nginx.conf
-COPY conf/nginx.vh.default.conf /etc/nginx/conf.d/default.conf
+COPY conf/site-default.conf /etc/nginx/sites-available/default.conf
 
 COPY run.sh /run.sh
 RUN chmod u+rwx /run.sh
