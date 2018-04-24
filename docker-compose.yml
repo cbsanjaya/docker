@@ -58,8 +58,8 @@ services:
     environment:
       - ADMIN_USER=${REDIS_ADMIN_USER}
       - ADMIN_PASS=${REDIS_ADMIN_PASS}
-      - REDIS_1_HOST=cache
-      - REDIS_1_PORT=6379
+      - REDIS_HOST=cache
+      - REDIS_PORT=6379
     ports:
       - "${REDIS_ADMIN_PORT}:80"
     depends_on:
