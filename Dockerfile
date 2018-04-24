@@ -1,15 +1,15 @@
-FROM cbsanjaya/laravel:app
+FROM php:7.2-fpm-alpine3.7
 
-WORKDIR /var/www/html
+ENV ADMIN_USER=admin
+ENV ADMIN_PASS=admin
 
-# Download tarball, verify it using gpg and extract
-RUN git clone --depth 1 https://github.com/ErikDubbelboer/phpRedisAdmin.git /var/www/html \
-    && composer install \
-    && cp /var/www/html/includes/config.environment.inc.php /var/www/html/includes/config.inc.php
+ENV REDIS_HOST=cache
+ENV REDIS_PORT=6379
 
-COPY site-default.conf /etc/nginx/sites-available/default.conf 
+WORKDIR /app/src
 
-EXPOSE 443 80
+COPY src /app/src
 
-ENTRYPOINT ["/run.sh"]
-CMD ["app"]
+EXPOSE 80
+
+ENTRYPOINT [ "php", "-S", "0.0.0.0:80" ]
