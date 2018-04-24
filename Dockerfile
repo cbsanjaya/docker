@@ -155,9 +155,7 @@ RUN apk update && \
     php composer-setup.php --install-dir=/usr/bin --filename=composer && \
     php -r "unlink('composer-setup.php');"
 
-COPY conf/supervisord.conf /etc/supervisord.conf
-COPY conf/nginx.conf /etc/nginx/nginx.conf
-COPY conf/site-default.conf /etc/nginx/sites-available/default.conf
+COPY etc /etc
 
 COPY run.sh /run.sh
 RUN chmod u+rwx /run.sh
