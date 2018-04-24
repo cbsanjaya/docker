@@ -1,10 +1,15 @@
-FROM composer
+FROM cbsanjaya/laravel:app
 
-WORKDIR /src/app
+WORKDIR /var/www/html
 
-RUN composer create-project -s dev erik-dubbelboer/php-redis-admin /src/app \
-    && cp /src/app/includes/config.environment.inc.php /src/app/includes/config.inc.php
+# Download tarball, verify it using gpg and extract
+RUN git clone --depth 1 https://github.com/ErikDubbelboer/phpRedisAdmin.git /var/www/html \
+    && composer install \
+    && cp /var/www/html/includes/config.environment.inc.php /var/www/html/includes/config.inc.php
 
-EXPOSE 80
+COPY site-default.conf /etc/nginx/sites-available/default.conf 
 
-ENTRYPOINT [ "php", "-S", "0.0.0.0:80" ]
+EXPOSE 443 80
+
+ENTRYPOINT ["/run.sh"]
+CMD ["app"]
