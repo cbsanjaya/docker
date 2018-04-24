@@ -5,7 +5,7 @@ services:
   app:
     image: cbsanjaya/laravel:app
     volumes:
-      - ${APP_SRC}:/var/www
+      - ${APP_SRC}:/var/www/html
     ports:
       - "80:80"
       - "443:443"
