@@ -155,6 +155,9 @@ RUN apk update && \
     php composer-setup.php --install-dir=/usr/bin --filename=composer && \
     php -r "unlink('composer-setup.php');"
 
+RUN addgroup -g 1000 -S laravel && \
+    adduser -u 1000 -S laravel -G laravel /bin/sh
+
 COPY etc /etc
 
 COPY run.sh /run.sh
