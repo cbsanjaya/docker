@@ -19,6 +19,9 @@ COPY restore.sh /bin/restore
 
 RUN chmod +x /bin/backup /bin/restore
 
+RUN addgroup --system --gid 1000 laravel && \
+    adduser --system --shell /bin/bash --no-create-home --disabled-password --uid 1000 --gid 1000 laravel
+
 CMD ["mysqld"]
 
 EXPOSE 3306
