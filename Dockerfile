@@ -1,4 +1,4 @@
-FROM mysql:5.7
+FROM mysql/mysql-server:8.0
 
 MAINTAINER Cahya Bagus Sanjaya <9c96b6@gmail.com>
 
@@ -17,10 +17,11 @@ COPY my.cnf /etc/mysql/conf.d/my.cnf
 COPY backup.sh /bin/backup
 COPY restore.sh /bin/restore
 
-RUN chmod +x /bin/backup /bin/restore
+RUN mkdir /backup && \
+    chmod +x /bin/backup /bin/restore
 
-RUN addgroup --system --gid 1000 laravel && \
-    adduser --system --shell /bin/bash --no-create-home --disabled-password --uid 1000 --gid 1000 laravel
+RUN groupadd -g 1000 laravel && \
+    useradd -M -s /bin/bash -u 1000 -g laravel laravel
 
 CMD ["mysqld"]
 
