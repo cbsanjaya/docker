@@ -156,7 +156,7 @@ RUN apk update && \
     php -r "unlink('composer-setup.php');"
 
 RUN addgroup -g 1000 -S laravel && \
-    adduser -u 1000 -S laravel -G laravel /bin/sh
+    adduser -s /bin/sh -D -H -u 1000 -S laravel -G laravel
 
 COPY etc /etc
 
