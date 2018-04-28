@@ -23,6 +23,8 @@ RUN mkdir /backup && \
 RUN addgroup --system --gid 1000 laravel && \
     adduser --system --shell /bin/bash --no-create-home --disabled-password --uid 1000 --gid 1000 laravel
 
+WORKDIR /backup
+
 CMD ["mysqld"]
 
 EXPOSE 3306
