@@ -169,3 +169,5 @@ STOPSIGNAL SIGTERM
 
 ENTRYPOINT ["/run.sh"]
 CMD ["app"]
+
+USER laravel
