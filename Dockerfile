@@ -38,7 +38,10 @@ RUN set -ex; \
 RUN mkdir /sessions \
     && mkdir -p /www/tmp \
     && chmod -R 777 /www/tmp \
-    && rm -R /etc
+    && rm -R /etc/crontab \
+    && rm -R /etc/nginx \
+    && rm -R /etc/supervisor.d \
+    && rm /etc/supervisord.conf \    
 
 COPY etc /etc
 
