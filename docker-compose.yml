@@ -31,13 +31,13 @@ services:
       - backend
 
   dbadmin:
-    image: phpmyadmin/phpmyadmin
+    image: cbsanjaya/laravel:dbadmin
     volumes:
       - dbadmin:/sessions
     environment:
       - PMA_ARBITRARY=1
-      - MYSQL_USER=${PMA_USER}
-      - MYSQL_PASSWORD=${PMA_PASSWORD}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
     ports:
       - "${PMA_PORT}:80"
     depends_on:
