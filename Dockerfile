@@ -42,8 +42,7 @@ RUN mkdir /sessions \
     && rm -R /etc/nginx \
     && rm -R /etc/supervisor.d \
     && rm /etc/php-fpm.conf \  
-    && rm /etc/php.ini \  
-    && rm /etc/supervisord.conf
+    && rm /etc/php.ini
 
 COPY etc /etc
 
