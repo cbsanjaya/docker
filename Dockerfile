@@ -3,7 +3,6 @@ FROM php:7.2-fpm-alpine3.7
 MAINTAINER Cahya bagus Sanjaya <9c96b6@gmail.com>
 
 RUN apk add --no-cache \
-	composer \
 	git \
     nginx \
     supervisor
@@ -32,7 +31,12 @@ RUN set -ex; \
     apk add --virtual .phpmyadmin-phpexts-rundeps $runDeps; \
     apk del .build-deps
 
-RUN addgroup -g 1000 -S laravel && \
+RUN EXPECTED_COMPOSER_SIGNATURE=$(wget -q -O - https://composer.github.io/installer.sig) && \
+    php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" && \
+    php -r "if (hash_file('SHA384', 'composer-setup.php') === '${EXPECTED_COMPOSER_SIGNATURE}') { echo 'Composer.phar Installer verified'; } else { echo 'Composer.phar Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;" && \
+    php composer-setup.php --install-dir=/usr/bin --filename=composer && \
+    php -r "unlink('composer-setup.php');" && \
+    addgroup -g 1000 -S laravel && \
     adduser -s /bin/sh -D -H -u 1000 -S laravel -G laravel
 
 COPY etc /etc
