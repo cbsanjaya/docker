@@ -1,3 +1,2 @@
 .env
-/source
-/src
+/volume/app/storage/*.key

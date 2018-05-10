@@ -1,0 +1,18 @@
+version: "3"
+
+services:
+
+  app:
+    image: registry.gitlab.com/yudharta/bak:latest
+    volumes:
+      - ${APP_STORAGE_VOLUME}:/var/www/html/storage
+      - ${APP_ENV_VOLUME}:/var/www/html/.env
+    ports:
+      - "80:80"
+      - "443:443"
+    depends_on:
+      - db
+      - cache
+    networks:
+      - backend
+      - frontend
