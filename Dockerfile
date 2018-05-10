@@ -1,7 +1,5 @@
 FROM php:7.2-fpm-alpine3.7
 
-MAINTAINER Cahya bagus Sanjaya <9c96b6@gmail.com>
-
 RUN apk add --no-cache \
 	git \
     nginx \
