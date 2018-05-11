@@ -5,8 +5,8 @@ services:
   app:
     image: ${APP_REGISTRY}
     volumes:
-      - ${APP_STORAGE_VOLUME}:/var/www/html/storage
-      - ${APP_ENV_VOLUME}:/var/www/html/.env
+      - ${APP_STORAGE_VOLUME}:/home/laravel/web/storage
+      - ${APP_ENV_VOLUME}:/home/laravel/web/.env
     ports:
       - "80:80"
       - "443:443"
