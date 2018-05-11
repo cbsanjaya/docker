@@ -35,7 +35,7 @@ RUN EXPECTED_COMPOSER_SIGNATURE=$(wget -q -O - https://composer.github.io/instal
     php composer-setup.php --install-dir=/usr/bin --filename=composer && \
     php -r "unlink('composer-setup.php');" && \
     addgroup -g 1000 -S laravel && \
-    adduser -s /bin/sh -D -H -u 1000 -S laravel -G laravel
+    adduser -s /bin/sh -D -u 1000 -S laravel -G laravel
 
 COPY etc /etc
 
