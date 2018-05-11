@@ -3,7 +3,7 @@ version: "3"
 services:
 
   app:
-    image: registry.gitlab.com/yudharta/bak:latest
+    image: ${$APP_REGISTRY}
     volumes:
       - ${APP_STORAGE_VOLUME}:/var/www/html/storage
       - ${APP_ENV_VOLUME}:/var/www/html/.env
