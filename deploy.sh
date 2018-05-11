@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 docker-compose exec -T --user laravel db backup
 docker-compose -f docker-compose.yml -f docker-compose.prod.yml pull app
