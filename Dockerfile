@@ -42,6 +42,8 @@ COPY etc /etc
 COPY run.sh /run.sh
 RUN chmod u+rwx /run.sh
 
+WORKDIR /home/cahya/laravel
+
 EXPOSE 443 80
 
 ENTRYPOINT ["/run.sh"]
