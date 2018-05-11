@@ -35,14 +35,16 @@ RUN EXPECTED_COMPOSER_SIGNATURE=$(wget -q -O - https://composer.github.io/instal
     php composer-setup.php --install-dir=/usr/bin --filename=composer && \
     php -r "unlink('composer-setup.php');" && \
     addgroup -g 1000 -S laravel && \
-    adduser -s /bin/sh -D -u 1000 -S laravel -G laravel
+    adduser -s /bin/sh -D -u 1000 -S laravel -G laravel && \
+    mkdir /home/laravel/web && \
+    chown laravel:laravel /home/laravel/web
 
 COPY etc /etc
 
 COPY run.sh /run.sh
 RUN chmod u+rwx /run.sh
 
-WORKDIR /home/cahya/laravel
+WORKDIR /home/laravel/web
 
 EXPOSE 443 80
 
