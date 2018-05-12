@@ -5,7 +5,7 @@ services:
   app:
     image: ${APP_REGISTRY}
     volumes:
-      - ${APP_STORAGE_VOLUME}:/home/laravel/web/storage
+      - app:/home/laravel/web/storage
       - ${APP_ENV_VOLUME}:/home/laravel/web/.env
     ports:
       - "80:80"
@@ -16,3 +16,6 @@ services:
     networks:
       - backend
       - frontend
+
+volumes:
+  app:
