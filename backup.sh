@@ -8,8 +8,8 @@ docker-compose exec -T --user laravel app php artisan down
 ##################################################################
 
 ###### backup sql database #######################################
-# backup to ./volume/database.sql.gz #
-docker-compose exec -T --user laravel db backup database
+# backup to ./volume/db.sql.gz #
+docker-compose exec -T --user laravel db backup db
 ##################################################################
 
 ###### global variable for backup file ###########################
@@ -19,55 +19,35 @@ VOL_EXT=$CUR_DIR_PATH/volume
 ##################################################################
 
 ###### backup app storage ########################################
-# backup to ./volume/app_file.tar.gz #
+# backup to ./volume/app.tar.bz2 #
 CONTAINER_APP=$CUR_DIR_NAME"_app_1"
-docker run --rm \
-    --volumes-from $CONTAINER_APP \
-    -v $VOL_EXT:/backup \
-    alpine \
-    tar czf /backup/app_file.tar.gz /home/laravel/web/storage/
-##################################################################
-
-###### backup cache data #########################################
-# backup to ./volume/cache_file.tar.gz #
 CONTAINER_CACHE=$CUR_DIR_NAME"_cache_1"
 docker run --rm \
+    --volumes-from $CONTAINER_APP \
     --volumes-from $CONTAINER_CACHE \
     -v $VOL_EXT:/backup \
-    alpine \
-    tar czf /backup/cache_file.tar.gz /data/
-##################################################################
-
-###### backup db file ############################################
-# backup to ./volume/db_file.tar.gz #
-CONTAINER_DB=$CUR_DIR_NAME"_db_1"
-docker run --rm \
-    --volumes-from $CONTAINER_DB \
-    -v $VOL_EXT:/backup \
-    alpine \
-    tar czf /backup/db_file.tar.gz /var/lib/mysql
+    alpine tar cjf /backup/app.tar.bz2 \
+    home/laravel/web/storage/ data/
 ##################################################################
 
 ###### compress volume folder to backup folder ###################
 POSTFIX="`date +%Y%m%d%H%M%S`";
 if [ -z "$1" ]; then
-    FILE_NAME=$CUR_DIR_PATH/backup/auto-$POSTFIX.tar.gz
+    FILE_NAME=$CUR_DIR_PATH/backup/auto-$POSTFIX.tar.bz2
 else
-    FILE_NAME=$CUR_DIR_PATH/backup/$1-$POSTFIX.tar.gz
+    FILE_NAME=$CUR_DIR_PATH/backup/$1-$POSTFIX.tar.bz2
 fi
 
 cd $CUR_DIR_PATH
-tar czf $FILE_NAME volume/
+tar cjf $FILE_NAME volume/
 ##################################################################
 
 ###### cleaning file on volume folder ############################
 docker run --rm \
     -v $VOL_EXT:/backup \
     alpine rm \
-    /backup/app_file.tar.gz \
-    /backup/cache_file.tar.gz \
-    /backup/database.sql.gz \
-    /backup/db_file.tar.gz
+    /backup/app.tar.bz2 \
+    /backup/db.sql.gz
 ##################################################################
 
 ###### only from auto backup #####################################
