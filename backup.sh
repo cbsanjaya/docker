@@ -25,7 +25,7 @@ docker run --rm \
     --volumes-from $CONTAINER_APP \
     -v $VOL_EXT:/backup \
     alpine \
-    tar czvf /backup/app_file.tar.gz /home/laravel/web/storage/
+    tar czf /backup/app_file.tar.gz /home/laravel/web/storage/
 ##################################################################
 
 ###### backup cache data #########################################
@@ -35,7 +35,7 @@ docker run --rm \
     --volumes-from $CONTAINER_CACHE \
     -v $VOL_EXT:/backup \
     alpine \
-    tar czvf /backup/cache_file.tar.gz /data/
+    tar czf /backup/cache_file.tar.gz /data/
 ##################################################################
 
 ###### backup db file ############################################
@@ -45,7 +45,7 @@ docker run --rm \
     --volumes-from $CONTAINER_DB \
     -v $VOL_EXT:/backup \
     alpine \
-    tar czvf /backup/db_file.tar.gz /var/lib/mysql
+    tar czf /backup/db_file.tar.gz /var/lib/mysql
 ##################################################################
 
 ###### compress volume folder to backup folder ###################
@@ -57,7 +57,7 @@ else
 fi
 
 cd $CUR_DIR_PATH
-tar czvf $FILE_NAME volume/
+tar czf $FILE_NAME volume/
 ##################################################################
 
 ###### cleaning file on volume folder ############################
