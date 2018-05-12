@@ -16,6 +16,3 @@ services:
     networks:
       - backend
       - frontend
-
-volumes:
-  app:

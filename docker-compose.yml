@@ -62,3 +62,4 @@ volumes:
   db:
   cache:
   dbadmin:
+  app:
