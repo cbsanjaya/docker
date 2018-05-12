@@ -9,6 +9,7 @@ CUR_DIR_NAME=${PWD##*/}
 CUR_DIR_PATH=$(pwd)
 VOL_EXT=$CUR_DIR_PATH/volume
 LOCAL_FILE=$CUR_DIR_PATH/backup/_restore.tar.bz2
+FTP_FILE=$CUR_DIR_PATH/backup/_restore_ftp.tar.bz2
 ##################################################################
 
 ###### Down Website ##############################################
@@ -78,7 +79,14 @@ restore_local() {
 
 ###### restore from ftp ###########################################
 restore_ftp() {
-    echo "ftp restore"
+    curl --user $FTP_USER:$FTP_PASS $FTP_HOST/_restore_ftp.tar.bz2 -o $FTP_FILE
+    if [ -e $FTP_FILE ]; then
+        tar xf $FTP_FILE -C $CUR_DIR_PATH
+        restore_all
+        rm $FTP_FILE
+    else
+        echo "file '_restore_ftp.tar.bz2' not found on $FTP_HOST"
+    fi
 }
 
 if [ -z "$1" ]; then
