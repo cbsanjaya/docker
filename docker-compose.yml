@@ -59,7 +59,7 @@ networks:
   backend:
 
 volumes:
-  db:
-  cache:
-  dbadmin:
   app:
+  cache:
+  db:
+  dbadmin:
