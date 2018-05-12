@@ -43,7 +43,7 @@ else
 fi
 
 cd $CUR_DIR_PATH
-tar cjf $FILE_NAME volume/
+tar --exclude='.gitignore' -cjf $FILE_NAME volume/
 ##################################################################
 
 ###### cleaning file on volume folder ############################
