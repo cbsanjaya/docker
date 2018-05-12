@@ -1,7 +1,5 @@
 FROM mysql:5.7
 
-MAINTAINER Cahya Bagus Sanjaya <9c96b6@gmail.com>
-
 #####################################
 # Set Timezone
 #####################################
@@ -20,10 +18,13 @@ COPY restore.sh /bin/restore
 RUN mkdir /backup && \
     chmod +x /bin/backup /bin/restore
 
-RUN addgroup --system --gid 1000 laravel && \
-    adduser --system --shell /bin/bash --no-create-home --disabled-password --uid 1000 --gid 1000 laravel
+RUN addgroup --gid 1000 laravel && \
+    adduser --shell /bin/bash --disabled-password --uid 1000 --gid 1000 laravel
 
-WORKDIR /backup
+RUN mkdir /home/laravel/backup && \
+    chown -R laravel:laravel /home/laravel/backup
+
+WORKDIR /home/laravel/backup
 
 CMD ["mysqld"]
 

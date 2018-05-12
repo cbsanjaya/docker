@@ -8,4 +8,4 @@ else
 fi
 
 mysqldump --user=$MYSQL_USER --password=$MYSQL_PASSWORD \
-    $MYSQL_DATABASE | gzip > /backup/$FILE_NAME
+    $MYSQL_DATABASE | gzip > $FILE_NAME
