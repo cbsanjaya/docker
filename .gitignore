@@ -1,3 +1,2 @@
 .env
-/volume/app/storage/*.key
-/volume/app/app.env
+backup.sh
