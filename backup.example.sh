@@ -52,7 +52,9 @@ if [ -z "$1" ]; then
 else
     FILE_NAME=$CUR_DIR_PATH/backup/$1-$POSTFIX.tar.gz
 fi
-tar czvf $FILE_NAME $CUR_DIR_PATH/volume/
+
+cd $CUR_DIR_PATH
+tar czvf $FILE_NAME volume/
 ##################################################################
 
 ###### cleaning file on volume folder ############################
