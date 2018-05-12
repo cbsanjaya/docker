@@ -1,13 +1,10 @@
-#!/bin/sh
+#!/bin/bash
 
 if [ "$1" != '' ]; then
-    # test mysql
-    mysqladmin --user=$MYSQL_USER --password=$MYSQL_PASSWORD
-    # restore database test passed
-    if [ $? -eq 0 ]; then
-        gzip -d < $1 | mysql --user=$MYSQL_USER \
-            --password=$MYSQL_PASSWORD $MYSQL_DATABASE
-    fi
+    FILE_NAME=/home/laravel/backup/$1.sql.gz
+
+    gzip -d < $FILE_NAME | mysql --user=$MYSQL_USER \
+        --password=$MYSQL_PASSWORD $MYSQL_DATABASE
 else
     echo 'masukkan nama file backup'
 fi
