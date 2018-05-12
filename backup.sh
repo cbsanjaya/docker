@@ -58,7 +58,7 @@ docker run --rm \
 ###### only from auto backup #####################################
 if [ -z "$1" ]; then
 ###### send current backup via ftp ###############################
-    curl -T $FILE_NAME $FTP_HOST/ --user $FTP_USER:$FTP_PASS
+    curl -T $FILE_NAME $FTP_HOST/ --user $FTP_USER:$FTP_PASS --silent
 ##################################################################
 
 ###### up Website ################################################

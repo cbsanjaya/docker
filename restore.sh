@@ -79,7 +79,7 @@ restore_local() {
 
 ###### restore from ftp ###########################################
 restore_ftp() {
-    curl --user $FTP_USER:$FTP_PASS $FTP_HOST/_restore_ftp.tar.bz2 -o $FTP_FILE
+    curl --user $FTP_USER:$FTP_PASS $FTP_HOST/_restore_ftp.tar.bz2 -o $FTP_FILE --silent
     if [ -e $FTP_FILE ]; then
         tar xf $FTP_FILE -C $CUR_DIR_PATH
         restore_all
