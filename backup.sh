@@ -1,4 +1,7 @@
 #!/bin/sh
+###### .env as source ############################################
+. ./.env
+##################################################################
 
 ###### Down Website ##############################################
 docker-compose exec -T --user laravel app php artisan down
@@ -70,9 +73,6 @@ docker run --rm \
 ###### only from auto backup #####################################
 if [ -z "$1" ]; then
 ###### send current backup via ftp ###############################
-    FTP_HOST=ftp://localhost/volume/
-    FTP_USER=ftp_user
-    FTP_PASS=ftp_pass
     curl -T $FILE_NAME $FTP_HOST --user $FTP_USER:$FTP_PASS
 ##################################################################
 
