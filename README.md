@@ -12,4 +12,4 @@ jalankan docker: `docker-compose -f docker-compose.yml -f docker-compose.prod.ym
 
 ## Backup dan Restore
 
-backup `docker-compose exec db backup` dan restore dengan `docker-compose exec restore <nama-file-backup>`
+backup `./backup` dan restore dengan `./restore [ftp]`
