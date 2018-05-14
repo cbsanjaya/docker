@@ -30,8 +30,9 @@ docker run --rm \
     home/laravel/web/storage/ data/
 ##################################################################
 
-###### copy .env ke volume #######################################
+###### copy .env dan folder etc ke volume ########################
 cp $CUR_DIR_PATH/.env $CUR_DIR_PATH/volume/.env
+tar -cjf $CUR_DIR_PATH/volume/etc.tar.bz2 etc/
 ##################################################################
 
 ###### compress volume folder to backup folder ###################
@@ -52,7 +53,8 @@ docker run --rm \
     alpine rm \
     /backup/.env \
     /backup/app.tar.bz2 \
-    /backup/db.sql.gz
+    /backup/db.sql.gz \
+    /backup/etc.tar.bz2
 ##################################################################
 
 ###### only from auto backup #####################################

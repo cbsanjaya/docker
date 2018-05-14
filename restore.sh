@@ -17,9 +17,11 @@ down_web() {
     docker-compose exec -T --user laravel app php artisan down
 }
 
-###### restore .env ############################
-restore_env() {
+###### restore .env dan folder etc ###############################
+restore_env_etc() {
     cp $CUR_DIR_PATH/volume/.env $CUR_DIR_PATH/.env
+    rm -R $CUR_DIR_PATH/etc/
+    tar xf $VOL_EXT/etc.tar.bz2 -C $CUR_DIR_PATH
 }
 
 ###### restore database from sql file ############################
@@ -53,7 +55,8 @@ clean_volume() {
         alpine rm \
         /backup/.env \
         /backup/app.tar.bz2 \
-        /backup/db.sql.gz
+        /backup/db.sql.gz \
+        /backup/etc.tar.bz2
 }
 
 ###### up Website ################################################
@@ -64,7 +67,7 @@ up_web() {
 ###### restore db and app ########################################
 restore_all() {
     down_web
-    restore_env
+    restore_env_etc
     restore_db
     restore_app
     clean_volume
