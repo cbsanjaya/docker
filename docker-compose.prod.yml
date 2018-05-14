@@ -7,6 +7,8 @@ services:
     volumes:
       - app:/home/laravel/web/storage
       - ./.env:/home/laravel/web/.env
+      - ./etc/nginx/certs:/etc/nginx/certs
+      - ./etc/nginx/sites-available:/etc/nginx/certs
     ports:
       - "80:80"
       - "443:443"
