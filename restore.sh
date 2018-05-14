@@ -14,7 +14,7 @@ FTP_FILE=$CUR_DIR_PATH/backup/_restore_ftp.tar.bz2
 
 ###### Down Website ##############################################
 down_web() {
-    docker-compose exec -T --user laravel app php artisan down
+    docker-compose exec -d -T --user laravel app php artisan down
 }
 
 ###### restore .env dan folder etc ###############################
@@ -26,7 +26,7 @@ restore_env_etc() {
 
 ###### restore database from sql file ############################
 restore_db() {
-    docker-compose exec -T db restore db
+    docker-compose exec -d -T db restore db
 }
 
 ###### restore app data web and cache ############################
@@ -61,7 +61,7 @@ clean_volume() {
 
 ###### up Website ################################################
 up_web() {
-    docker-compose exec -T --user laravel app php artisan up
+    docker-compose exec -d -T --user laravel app php artisan up
 }
 
 ###### restore db and app ########################################

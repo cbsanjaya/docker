@@ -4,12 +4,12 @@
 ##################################################################
 
 ###### Down Website ##############################################
-docker-compose exec -T --user laravel app php artisan down
+docker-compose exec -d -T --user laravel app php artisan down
 ##################################################################
 
 ###### backup sql database #######################################
 # backup to ./volume/db.sql.gz #
-docker-compose exec -T --user laravel db backup db
+docker-compose exec -d -T --user laravel db backup db
 ##################################################################
 
 ###### global variable for backup file ###########################
@@ -64,7 +64,7 @@ if [ -z "$1" ]; then
 ##################################################################
 
 ###### up Website ################################################
-    docker-compose exec -T --user laravel app php artisan up
+    docker-compose exec -d -T --user laravel app php artisan up
 ##################################################################
 fi
 ##################################################################
