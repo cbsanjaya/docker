@@ -6,7 +6,7 @@ services:
     image: ${APP_REGISTRY}
     volumes:
       - app:/home/laravel/web/storage
-      - ./etc/app.env:/home/laravel/web/.env
+      - ./.env:/home/laravel/web/.env
       - ./etc/nginx/certs:/etc/nginx/certs
       - ./etc/nginx/sites-available:/etc/nginx/sites-available
     ports:

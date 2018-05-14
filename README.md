@@ -13,3 +13,7 @@ jalankan docker: `docker-compose -f docker-compose.yml -f docker-compose.prod.ym
 ## Backup dan Restore
 
 backup `./backup` dan restore dengan `./restore [ftp]`
+
+## Warning
+
+selalu recreate container app jika .env diubah. env tidak tersinkron
