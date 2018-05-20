@@ -58,6 +58,10 @@ docker run --rm \
     /backup/etc.tar.bz2
 ##################################################################
 
+###### delete backup file older than 7 day ############################
+find ./backup/*.tar.bz2 -mtime +7 -type f -delete
+##################################################################
+
 ###### only from auto backup #####################################
 if [ -z "$1" ]; then
 ###### send current backup via ftp ###############################
