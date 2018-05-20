@@ -1,5 +1,12 @@
 #!/bin/bash
 
+###### global variable for backup file ###########################
+POSTFIX="`date +%Y%m%d%H%M%S`";
+CUR_DIR_NAME=${PWD##*/}
+CUR_DIR_PATH=$(pwd)
+VOL_EXT=$CUR_DIR_PATH/volume
+##################################################################
+
 ###### .env as source ############################################
 . ./.env
 ##################################################################
@@ -11,12 +18,6 @@ docker-compose exec -d -T --user laravel app php artisan down
 ###### backup sql database #######################################
 # backup to ./volume/db.sql.gz #
 docker-compose exec -d -T --user laravel db backup db
-##################################################################
-
-###### global variable for backup file ###########################
-CUR_DIR_NAME=${PWD##*/}
-CUR_DIR_PATH=$(pwd)
-VOL_EXT=$CUR_DIR_PATH/volume
 ##################################################################
 
 ###### backup app storage ########################################
@@ -37,7 +38,6 @@ tar -cjf $CUR_DIR_PATH/volume/etc.tar.bz2 etc/
 ##################################################################
 
 ###### compress volume folder to backup folder ###################
-POSTFIX="`date +%Y%m%d%H%M%S`";
 if [ -z "$1" ]; then
     FILE_NAME=$CUR_DIR_PATH/backup/auto-$POSTFIX.tar.bz2
 else
