@@ -3,9 +3,11 @@ version: "3"
 services:
 
   app:
-    image: cbsanjaya/laravel:app
+    image: cbsanjaya/laravel:appdev
     volumes:
       - ${APP_SRC}:/home/laravel/web
+      - ${APP_COMPOSER}:/home/laravel/.composer
+      - ${APP_YARN}:/home/laravel/.cache/yarn
     ports:
       - "80:80"
       - "443:443"
