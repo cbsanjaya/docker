@@ -38,7 +38,7 @@ RUN set -ex; \
 RUN mkdir /sessions \
     && mkdir -p /www/tmp \
     && chmod -R 777 /www/tmp \
-    && rm -R /etc/crontab \
+    && rm -R /etc/crontabs \
     && rm -R /etc/nginx \
     && rm -R /etc/supervisor.d \
     && rm /etc/php-fpm.conf \  
