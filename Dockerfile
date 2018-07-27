@@ -3,7 +3,7 @@ FROM cbsanjaya/laravel:app
 MAINTAINER Cahya bagus Sanjaya <9c96b6@gmail.com>
 
 # Calculate download URL
-ENV VERSION 4.8.0.1
+ENV VERSION 4.8.2
 ENV URL https://files.phpmyadmin.net/phpMyAdmin/${VERSION}/phpMyAdmin-${VERSION}-all-languages.tar.gz
 LABEL version=$VERSION
 
