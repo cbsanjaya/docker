@@ -9,6 +9,7 @@ services:
       - ./.env:/home/laravel/web/.env
       - ./etc/nginx/certs:/etc/nginx/certs
       - ./etc/nginx/sites-available:/etc/nginx/sites-available
+    restart: always
     ports:
       - "80:80"
       - "443:443"
