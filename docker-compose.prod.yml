@@ -19,3 +19,15 @@ services:
     networks:
       - backend
       - frontend
+
+  db:
+    restart: always
+
+  dbadmin:
+    restart: always
+    
+  cache:
+    restart: always
+
+  cacheadmin:
+    restart: always
