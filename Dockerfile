@@ -1,4 +1,4 @@
-FROM php:7.2-fpm-alpine3.7
+FROM php:fpm-alpine
 
 RUN apk add --no-cache \
     nginx \
@@ -17,7 +17,7 @@ RUN set -ex; \
     ; \
     \
     docker-php-ext-configure gd --with-freetype-dir=/usr --with-jpeg-dir=/usr --with-webp-dir=/usr --with-png-dir=/usr --with-xpm-dir=/usr; \
-    docker-php-ext-install bz2 gd mysqli opcache pdo_mysql zip; \
+    docker-php-ext-install bz2 gd mysqli opcache pdo_mysql zip bcmath; \
     \
     runDeps="$( \
         scanelf --needed --nobanner --format '%n#p' --recursive /usr/local/lib/php/extensions \
