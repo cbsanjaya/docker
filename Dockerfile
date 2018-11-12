@@ -1,4 +1,4 @@
-FROM php:7.2-fpm-alpine3.7
+FROM php:fpm-alpine
 
 ENV ADMIN_USER=admin
 ENV ADMIN_PASS=admin
