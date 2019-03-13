@@ -8,6 +8,7 @@ services:
       - ${APP_SRC}:/home/laravel/web
       - ${APP_COMPOSER}:/home/laravel/.composer
       - ${APP_YARN}:/home/laravel/.cache/yarn
+      - ./etc/nginx/sites-available:/etc/nginx/sites-available
     ports:
       - "80:80"
       - "443:443"
